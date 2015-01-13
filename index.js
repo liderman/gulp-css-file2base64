@@ -8,7 +8,7 @@ var gutil = require('gulp-util');
 // Consts
 var PLUGIN_NAME = 'gulp-css-file2base64';
 
-var REGEX_FUNCTION = /file2base64\(\'([^\']*)\'\)/gi;
+var REGEX_FUNCTION = /file2base64\((?:'|\\')([^\']*)(?:'|\\')\)/gi;
 
 // Plugin level function(dealing with files)
 function gulpCssFile2base64(opts) {
@@ -25,12 +25,12 @@ function gulpCssFile2base64(opts) {
     var filePath = path.dirname(file.path);
     
     if (file.isBuffer()) {
-      var str = file.contents.toString('utf8');
+      var str = file.contents.toString();
       var result = str.replace(REGEX_FUNCTION, function(matches, relativePath) {
         var fullPath = path.normalize(path.join(filePath, relativePath));
         
         if (fs.existsSync(fullPath)) {
-          var bitmap = fs.readFileSync(fullPath, 'utf-8');
+          var bitmap = fs.readFileSync(fullPath);
           return new Buffer(bitmap).toString('base64'); // Success convert to base64
         }
       
