@@ -1,6 +1,13 @@
 # gulp-css-file2base64
 > Gulp plugin. Adds a function file2base64, which loads the file and inserts the contents of a file as a base64 string.
 
+### Table of Contents
+
+- [Install](#install)
+- [Options](#options)
+- [Example usage](#example-usage)
+- [How to use with sass](#how-to-use-with-sass)
+
 ## Install
 
 ```shell
